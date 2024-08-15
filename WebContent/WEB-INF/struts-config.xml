@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="loginActionForm" type="vm.formbean.LoginActionForm" />
+		<form-bean name="backendActionForm" type="vm.formbean.BackendActionForm" />
+		<form-bean name="frontendActionForm" type="vm.formbean.GoodsOrderForm">
+			<form-property name="searchKeyword" type="java.lang.String" />
+			<form-property name="pageNo" type="java.lang.String" />
+		</form-bean>
+		<form-bean name="shoppingCartGoodsForm" type="vm.formbean.ShoppingCartGoodsForm" />
+		<form-bean name="shoppingCartGoodsInfoForm" type="vm.formbean.ShoppingCartGoodsInfoForm" />
+	</form-beans>
+	<action-mappings>
+		<action path="/LoginAction" type="vm.action.LoginAction"
+			parameter="action">
+			<!-- 登入成功進入操作首頁 -->
+			<forward name="success" path="/FrontendAction.do?action=showGoods" redirect="true" />
+			<!-- 登入失敗重回登入頁面 -->
+			<forward name="fail" path="/VM_Login.jsp" />
+		</action>
+
+
+		<action path="/BackendAction" type="vm.action.BackendAction"
+			name="backendActionForm" parameter="action">
+			<!-- 商品查詢 -->
+			<forward name="goodsListView" path="/WEB-INF/VM_Backend_GoodsList.jsp" />
+
+			<!-- 商品修改 -->
+			<forward name="goodsReplenishmentView"
+				path="/BackendAction.do?action=goodsReplenishmentView" redirect="true" />
+			<forward name="goodsReplenishment" path="/WEB-INF/VM_Backend_GoodsReplenishment.jsp" />
+
+			<!-- 商品新增 -->
+			<forward name="goodsCreateView" path="/BackendAction.do?action=goodsCreateView"	redirect="true" />
+			<forward name="goodsCreate" path="/WEB-INF/VM_Backend_GoodsCreate.jsp" />
+
+
+			<!-- 訂單查詢 -->
+			<forward name="goodsSaleReportView" path="/WEB-INF/VM_Backend_GoodsSaleReport.jsp" />
+
+		</action>
+		<action path="/FrontendAction" type="vm.action.FrontendAction"
+			name="frontendActionForm" parameter="action">
+			<forward name="vendingMachineView" path="/VendingMachine.jsp" />
+			<forward name="showGoods" path="/VendingMachine.jsp" />
+		</action>
+
+		<action path="/showGoods" type="vm.action.FrontendAction"
+			name="frontendActionForm" parameter="action">
+			<forward name="vendingMachineView" path="/VendingMachine.jsp" />
+		</action>
+
+		<action path="/addCartGoods" type="vm.action.FrontendAction"
+			name="shoppingCartGoodsForm" parameter="action" scope="request"
+			validate="false">
+			<forward name="vendingMachineView" path="/VendingMachine.jsp" />
+		</action>
+		<action path="/queryCartGoods" type="vm.action.FrontendAction"
+			name="shoppingCartGoodsForm" parameter="action" scope="request"
+			validate="false">
+			<forward name="vendingMachineView" path="/VendingMachine.jsp" />
+		</action>
+		<action path="/clearCartGoods" type="vm.action.FrontendAction"
+			name="shoppingCartGoodsForm" parameter="action" scope="request"
+			validate="false">
+			<forward name="vendingMachineView" path="/VendingMachine.jsp" />
+		</action>
+		<action path="/checkout" type="vm.action.FrontendAction" name="shoppingCartGoodsForm"
+			parameter="action" scope="request" validate="false">
+			<forward name="vendingMachineView" path="/VendingMachine.jsp" />			
+		</action>
+	</action-mappings>
+</struts-config>

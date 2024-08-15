@@ -1,0 +1,1 @@
+mklink /d .\DrinksImage \home\VendingMachine\DrinksImage
