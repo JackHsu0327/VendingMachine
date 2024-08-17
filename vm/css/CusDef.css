@@ -1,8 +1,0 @@
-/* 表格框線顏色 */
-table{ border-color: red; }
-/* 表格欄位字體粗細 */
-td { font-weight:bold; }
-/* class套用 */
-.classTD {color: white; background-color: green;}
-/* id套用 */
-#idTD {color: white; background-color: blue;}
